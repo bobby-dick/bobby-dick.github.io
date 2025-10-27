@@ -1,1 +1,1641 @@
-# bobby-dick.github.io
+[index.html](https://github.com/user-attachments/files/23162740/index.html)
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padel Kompet - Simplifiez la gestion de vos tournois de padel</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        /* Variables CSS - Palette moderne basée sur les références */
+        :root {
+            --primary-blue: #AAF770;
+            --primary-orange: #FF7F32;
+            --primary-green: #7CFC00;
+            --accent-purple: #9C27B0;
+            --accent-red: #F44336;
+            --success-green: #8BC34A;
+            --light-blue: #6C9EFF;
+            --dark-grey: #555555;
+            --light-gray: #F8F9FA;
+            --border-gray: #E0E0E0;
+            --white: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --text-muted: #888888;
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 200px;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .cta-button {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #8FDD4A;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(170, 247, 112, 0.3);
+        }
+
+        /* Section Héro - Style moderne inspiré de Caree */
+        .hero {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            padding: 100px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0,300 Q300,200 600,300 T1200,300 L1200,0 L0,0 Z" fill="%23AAF770" opacity="0.05"/><path d="M0,400 Q400,300 800,400 T1200,400 L1200,600 L0,600 Z" fill="%23FF7F32" opacity="0.03"/></svg>') center/cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-left {
+            text-align: left;
+        }
+
+        .hero-right {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-screen {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2a2a2a;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .hero-screen::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            background: #ff5f57;
+            border-radius: 50%;
+            box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28ca42;
+        }
+
+        .hero-interface {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .hero-interface-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-interface-logo {
+            font-weight: 700;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .hero-interface-nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .hero-interface-nav span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .hero-interface-content {
+            padding: 20px;
+            height: calc(100% - 60px);
+            overflow-y: auto;
+        }
+
+        .hero-tournament-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .hero-tournament-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .hero-tournament-logo {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .hero-tournament-status {
+            background: #ff7f32;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .hero-tournament-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .hero-tournament-details {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-tournament-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .hero-tournament-tag {
+            background: #f1f3f4;
+            color: #666;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary-blue);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 50px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .hero-screen {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: #2a2a2a;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .hero-screen::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            background: #ff5f57;
+            border-radius: 50%;
+            box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28ca42;
+        }
+
+        .hero-interface {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .hero-interface-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-interface-logo {
+            font-weight: 700;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .hero-interface-nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .hero-interface-nav span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .hero-interface-content {
+            padding: 20px;
+            height: calc(100% - 60px);
+            overflow-y: auto;
+        }
+
+        .hero-tournament-card {
+            background: #fff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .hero-tournament-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .hero-tournament-logo {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .hero-tournament-status {
+            background: #ff7f32;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .hero-tournament-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .hero-tournament-details {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-tournament-tags {
+            display: flex;
+            gap: 8px;
+        }
+
+        .hero-tournament-tag {
+            background: #f1f3f4;
+            color: #666;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #8FDD4A;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(170, 247, 112, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-1px);
+        }
+
+        /* Section Problème/Solution - Style moderne */
+        .problem-solution {
+            padding: 100px 20px;
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 80px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .features-cascade {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-top: 60px;
+        }
+
+        .features-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 30px 0;
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            min-width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-icon-img {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-icon-img:hover {
+            transform: scale(1.1);
+        }
+
+        .feature-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-text li {
+            padding: 6px 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-text li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .feature-text blockquote {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-blue);
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .features-screen {
+            position: sticky;
+            top: 100px;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            background: #1a1a1a;
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-header {
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-logo {
+            height: 25px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .phone-content {
+            padding: 20px;
+            height: calc(100% - 70px);
+            overflow-y: auto;
+        }
+
+        .phone-feature {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .phone-feature.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .phone-feature-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .phone-feature-content {
+            color: #ccc;
+        }
+
+        .player-list {
+            margin-bottom: 20px;
+        }
+
+        .player-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        .player-item:last-child {
+            border-bottom: none;
+        }
+
+        .import-button {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .import-button:hover {
+            background: #8FDD4A;
+        }
+
+        .tournament-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tree-level {
+            display: flex;
+            justify-content: space-around;
+            gap: 8px;
+        }
+
+        .tree-node {
+            background: #333;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            text-align: center;
+            min-width: 50px;
+        }
+
+        .live-match {
+            background: #333;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .match-players {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .match-score {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .match-status {
+            font-size: 0.8rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .feature-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .feature-card li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-card blockquote {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-blue);
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .feature-icon-img {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon-img {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Section Bénéfices - Style moderne */
+        .benefits {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-blue), var(--primary-green));
+        }
+
+        .benefit-card.referee::before {
+            background: linear-gradient(180deg, var(--primary-blue), var(--light-blue));
+        }
+
+        .benefit-card.club::before {
+            background: linear-gradient(180deg, var(--primary-green), var(--success-green));
+        }
+
+        .benefit-card.player::before {
+            background: linear-gradient(180deg, var(--primary-orange), var(--accent-purple));
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon-img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon-img {
+            transform: scale(1.1);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Section Interface */
+        .interface {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+
+        .interface-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .interface-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .interface-text p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .interface-image {
+            text-align: center;
+        }
+
+        .interface-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(14, 111, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interface-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="20" width="80" height="60" rx="5" fill="%23ffffff" opacity="0.1"/><rect x="20" y="30" width="60" height="40" rx="3" fill="%23ffffff" opacity="0.2"/><circle cx="30" cy="40" r="2" fill="%23ffffff" opacity="0.3"/><circle cx="50" cy="40" r="2" fill="%23ffffff" opacity="0.3"/><circle cx="70" cy="40" r="2" fill="%23ffffff" opacity="0.3"/></svg>') center/cover;
+            opacity: 0.3;
+        }
+
+        .interface-placeholder:hover {
+            transform: scale(1.02);
+        }
+
+        .placeholder-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .placeholder-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .placeholder-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .placeholder-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Section Témoignages - Style Caree */
+        .testimonials {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testimonial-club {
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Section CTA moderne */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .cta-feature-icon {
+            background: var(--white);
+            color: var(--primary-blue);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 60px 20px 40px;
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-bottom: 40px;
+        }
+
+        .footer-cta h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .logo-img {
+                height: 35px;
+                max-width: 150px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-left {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-screen {
+                max-width: 100%;
+                height: 300px;
+            }
+
+            .hero-left h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-left p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .interface-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .benefits-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-cascade {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-screen {
+                position: static;
+                order: -1;
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero-left h1 {
+                font-size: 2rem;
+            }
+
+            .hero-visual {
+                height: 250px;
+            }
+
+            .phone-mockup {
+                width: 200px;
+                height: 400px;
+            }
+
+            .interface-placeholder {
+                height: 300px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .benefit-card,
+            .testimonial-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Suppression des animations pour éviter le scintillement */
+        .fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Optimisation du scroll */
+        html {
+            scroll-behavior: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYzIiBoZWlnaHQ9IjE3NiIgdmlld0JveD0iMCAwIDc2MyAxNzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0zNjIuMjIgMTAwLjM1OEMzODQuMDM3IDEwMC4zNTkgNDAwLjAzOCAxMTYuMzQ3IDQwMC4wMzggMTM4LjE0OEM0MDAuMDM4IDE1OS45NSAzODQuMDM3IDE3NS45MzggMzYyLjIyIDE3NS45MzhDMzQwLjQwMiAxNzUuOTM4IDMyNC40MDMgMTU5Ljk1IDMyNC40MDIgMTM4LjE0OEMzMjQuNDAyIDExNi4zNDcgMzQwLjQwMiAxMDAuMzU4IDM2Mi4yMiAxMDAuMzU4Wk0yNTguMjA5IDEzNi44MzlMMjk3LjMzNiAxMDEuODExSDMxNy45OUwyODQuMSAxMzIuMTg4TDMxNy45OSAxNzQuNDgzSDMwMC4yNDVMMjczLjc3MiAxNDEuNDlMMjU4LjIwOSAxNTUuNDQzVjE3NC40ODNIMjQzLjY2NFYxMDEuODExSDI1OC4yMDlWMTM2LjgzOVpNNDU0LjAxOCAxMzIuMzMzSDQ1NS4xODJMNDc3Ljg3MiAxMDEuODExSDQ5MC45NjNWMTc0LjQ4M0g0NzYuNDE4VjEyMy42MTJINDc2LjEyN0M0NzYuMTEzIDEyMy42NTYgNDc0LjY2IDEyOC4yOCA0NzIuMDU0IDEzMS43NTJMNDYxLjg3MiAxNDUuNDE1SDQ0Ny4zMjdMNDM3LjE0NiAxMzEuNzUyQzQzNC41NDMgMTI4LjI4NSA0MzMuMDkgMTIzLjY2OSA0MzMuMDcyIDEyMy42MTJINDMyLjc4MlYxNzQuNDgzSDQxOC4yMzZWMTAxLjgxMUg0MzEuMzI3TDQ1NC4wMTggMTMyLjMzM1pNNTY1LjIwMSAxMDEuODExQzU3OC4yOTIgMTAxLjgxMSA1ODcuMDE5IDExMC41MzEgNTg3LjAyIDEyMy42MTJDNjg3LjAxOSAxMzYuMTEyIDU3OC4yOTIgMTQ0LjY4NyA1NjUuMjAxIDE0NC42ODhINTI3LjM4M1YxNzQuNDgzSDUxMi44MzhWMTAxLjgxMUg1NjUuMjAxWk02NzUuNzI5IDExNC44OTJINjE5LjAwMlYxMzEuNjA2SDY2MS4xODRWMjQ0LjY4OEg2MTkuMDAyVjE2MS40MDJINjc1LjcyOVYxNzQuNDgzSDYwNC40NTZWMTAxLjgxMUg2NzUuNzI5VjExNC44OTJaTTc2My4wMDEgMTE0Ljg5Mkg3MzMuOTFWMjQ0LjQ4M0g3MTkuMzY0VjExNC44OTJINjkwLjI3NFYxMDEuODExSDc2My4wMDFWMTE0Ljg5MlpNNDMuNjk3MyAzOC40ODgzSDQ4LjY5MTRMODcuMzk0NSAwSDE3OS4wMzNWNDMuNDU1MUgxNDAuMDhWNDguMTcyOUwxNzkuMDMzIDg2LjkwOTJWMTMwLjM2NEg4Ny4zOTQ1TDQ4LjY5MTQgOTEuODc2SDQzLjY5NzNWMTczLjgxOEgwVjg2LjkwOTJMMzguNzAzMSA0OC40MjA5VjQzLjQ1NTFIMFYwSDQzLjY5NzNWMzguNDg4M1pNMzYyLjIyIDExNC4xNjZDMzQ5LjEyOSAxMTQuMTY2IDMzOS42NzUgMTI0LjM0MSAzMzkuNjc1IDEzOC4xNDhDMzM5LjY3NSAxNTEuOTU2IDM0OS4xMjkgMTYyLjEzMSAzNjIuMjIgMTYyLjEzMUMzNzUuMzEgMTYyLjEzMSAzODQuNzY0IDE1MS45NTYgMzg0Ljc2NSAxMzguMTQ4QzM4NC43NjUgMTI0LjM0MSAzNzUuMzEgMTE0LjE2NiAzNjIuMjIgMTE0LjE2NlpNNTI3LjM4MyAxMzEuNjA2SDU2NS4yMDFDNTY5LjU2NCAxMzEuNjA2IDU3Mi40NzMgMTI4LjY5OSA1NzIuNDc0IDEyNC4zMzlWMTIyLjE1OUM1NzIuNDc0IDExNy43OTkgNTY5LjU2NSAxMTQuODkyIDU2NS4yMDEgMTE0Ljg5Mkg1MjcuMzgzVjEzMS42MDZaTTQzLjY5NzMgODYuOTA5MkgxMzUuMzM2VjQzLjQ1NTFINDMuNjk3M1Y4Ni45MDkyWk0yOTYuMDI3IDAuMDAwOTc2NTYyQzMwOS4xMTggMC4wMDExODc3MyAzMTcuODQ2IDguNzIxODMgMzE3Ljg0NiAyMS44MDI3QzMxNy44NDUgMzQuMzAyMSAzMDkuMTE4IDQyLjg3NzcgMjk2LjAyNyA0Mi44Nzc5SDI1OC4yMDlWNzIuNjczOEgyNDMuNjY0VjAuMDAwOTc2NTYySDI5Ni4wMjdaTTM5OC41NDMgNzIuNjczOEgzODIuODM0TDM3Ni44NzEgNTguMTM5NkgzMzguNDcyTDMzMi41MDggNzIuNjczOEgzMTcuMDlMMzQ2LjkwNyAwLjAwMDk3NjU2MkgzNjguNzI2TDM5OC41NDMgNzIuNjczOFpNNDUwLjE5NiAwLjAwMDk3NjU2MkM0NzIuMDE0IDAuMDAxMTU0NDYgNDg4LjAxNSAxNS4yNjI4IDQ4OC4wMTUgMzYuMzM3OUM0ODguMDE0IDU3LjI2NzMgNDcyLjAxNCA3Mi42NzM2IDQ1MC4xOTYgNzIuNjczOEg0MTMuODMzVjAuMDAwOTc2NTYySDQ1MC4xOTZaTTU3Ny40MzQgMTMuMDgySDUyMC43MDdWMjkuNzk2OUg1NjIuODg5VjQyLjg3NzlINTIwLjcwN1Y1OS41OTI4SDU3Ny40MzRWNzIuNjczOEg1MDYuMTYyVjAuMDAwOTc2NTYySDU3Ny40MzRWMTMuMDgyWk02MTEuNjE1IDU5LjU5MjhINjU1LjI1MVY3Mi42NzM4SDU5Ny4wN1YwLjAwMDk3NjU2Mkg2MTEuNjE1VjU5LjU5MjhaTTQyOC4zNzggNTkuNTkyOEg0NTAuMTk2QzQ2My4yODcgNTkuNTkyNiA0NzIuNzQxIDQ5Ljg1NDYgNDcyLjc0MSAzNi4zMzc5QzQ3Mi43NDEgMjIuOTY2MiA0NjMuMjg3IDEzLjA4MjIgNDUwLjE5NiAxMy4wODJINDI4LjM3OFY1OS41OTI4Wk0zNDMuODUzIDQ1LjA1ODZIMzcxLjQ4OUwzNTguMzk4IDEzLjA4MkgzNTYuOTQzTDM0My44NTMgNDUuMDU4NlpNMjU4LjIwOSAyOS43OTY5SDI5Ni4wMjdDMzAwLjM5MSAyOS43OTY3IDMwMy4zIDI2Ljg4OTMgMzAzLjMgMjIuNTI5M1YyMC4zNDk2QzMwMy4zIDE1Ljk4OTQgMzAwLjM5MSAxMy4wODIyIDI5Ni4wMjcgMTMuMDgySDI1OC4yMDlWMjkuNzk2OVoiIGZpbGw9IiMxOTE5MUIiLz4KPC9zdmc+" alt="Padel Kompet Logo" class="logo-img">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#fonctionnalites">Fonctionnalités</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#" class="cta-button">Accéder à la plateforme</a>
+        </nav>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <h1>Reprends le contrôle du <span class="highlight">terrain.</span></h1>
+                <p>Padel Kompet simplifie tes tournois pour que tu te concentres sur l'essentiel : le jeu.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">Regarde la démo</a>
+                    <a href="#" class="btn-secondary">Télécharge l'app</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-screen">
+                    <div class="hero-interface">
+                        <div class="hero-interface-header">
+                            <div class="hero-interface-logo">PADEL KOMPET</div>
+                            <div class="hero-interface-nav">
+                                <span>Tournois passés</span>
+                                <span>🏆</span>
+                                <span>☰</span>
+                            </div>
+                        </div>
+                        <div class="hero-interface-content">
+                            <div class="hero-tournament-card">
+                                <div class="hero-tournament-header">
+                                    <div class="hero-tournament-logo">CASA</div>
+                                    <div class="hero-tournament-status">Ouvert</div>
+                                </div>
+                                <div class="hero-tournament-title">The Big One - Casa Padel</div>
+                                <div class="hero-tournament-details">
+                                    <span>Aujourd'hui</span>
+                                    <span>Paris</span>
+                                    <span>11:00</span>
+                                    <span>12/16 équipes</span>
+                                </div>
+                                <div class="hero-tournament-tags">
+                                    <span class="hero-tournament-tag">P25</span>
+                                    <span class="hero-tournament-tag">Messieurs ♂</span>
+                                </div>
+                            </div>
+                            <div class="hero-tournament-card">
+                                <div class="hero-tournament-header">
+                                    <div class="hero-tournament-logo">4PADEL</div>
+                                    <div class="hero-tournament-status" style="background: #8b5cf6;">En cours</div>
+                                </div>
+                                <div class="hero-tournament-title">Summer Championship - 4 Padel</div>
+                                <div class="hero-tournament-details">
+                                    <span>Jeudi 2 Juillet</span>
+                                    <span>11:00</span>
+                                    <span>Paris</span>
+                                    <span>12/16 équipes</span>
+                                </div>
+                                <div class="hero-tournament-tags">
+                                    <span class="hero-tournament-tag">P25</span>
+                                    <span class="hero-tournament-tag">Messieurs ♂</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Section Bénéfices -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Des bénéfices pour tous</h2>
+            <p class="section-subtitle">Une plateforme pour fédérer tous les acteurs du padel</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card referee">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHJ4PSI4IiBmaWxsPSIjMUU2RkZGIi8+CjxwYXRoIGQ9Ik0yMCAyMEw0MCAyMEw0MCA0MEwyMCA0MFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yNSAyNUwzNSAyNUwzNSAzNUwyNSAzNVoiIGZpbGw9IiMxRTZGRkYiLz4KPC9zdmc+" alt="Juge-Arbitre" class="benefit-icon-img">
+                    <h3>Juge-Arbitre : tout pour le terrain</h3>
+                    <p><strong>Gagnez du temps</strong> – avant, pendant et après le tournoi.
+                        <strong>Gérez plus de paires</strong> – sans multiplier les fichiers.
+                        <strong>Moins de stress</strong> – tout est fluide, centralisé et fiable.</p>
+                </div>
+                <div class="benefit-card club">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiM5QzI3QjAiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zMCAxMEMzNSAxMCA0MCAxNSA0MCAyMFM0NSAzMCA0MCAzMFMzMCAyNSAzMCAyMFMzNSAxMCAzMCAxMFoiIGZpbGw9IiM5QzI3QjAiLz4KPC9zdmc+" alt="Club" class="benefit-icon-img">
+                    <h3>Club : offrez l'expérience qui fait la différence</h3>
+                    <p><strong>Valorisez votre image</strong> – une organisation fluide, pro et moderne.
+                        <br><strong>Fidélisez vos joueurs</strong> – grâce à des tournois sans accroc et une visibilité en ligne.</p>
+                </div>
+                <div class="benefit-card player">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiM3Q0ZDMDAiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zMCAxMEMzNSAxMCA0MCAxNSA0MCAyMFM0NSAzMCA0MCAzMFMzMCAyNSAzMCAyMFMzNSAxMCAzMCAxMFoiIGZpbGw9IiM3Q0ZDMDAiLz4KPC9zdmc+" alt="Joueur" class="benefit-icon-img">
+                    <h3>Joueur</h3>
+                    <p><strong>Inscrivez-vous facilement</strong> – process unifié
+                        <br><strong>Suivez votre planning et vos résultats</strong> – mis à jour en direct, sur le web ou mobile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Section Problème/Solution -->
+        <section class="problem-solution" id="fonctionnalites">
+            <div class="container">
+                <h2 class="section-title">Des outils simples, intuitifs et pensés pour les vrais besoins du terrain</h2>
+                
+                <div class="features-cascade">
+                    <div class="features-content">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9IiMwRjZGRkYiLz4KPHBhdGggZD0iTTIwIDMwQzI1IDI1IDM1IDI1IDQwIDMwUzM1IDM1IDMwIDQwUzI1IDM1IDIwIDMwWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0zMCAxMEMzNSAxMCA0MCAxNSA0MCAyMFMzNSAzMCAzMCAzMFMyMCAyNSAyMCAyMFMyNSAxMCAzMCAxMFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=" alt="Inscriptions" class="feature-icon-img">
+                            </div>
+                            <div class="feature-text">
+                                <h3>Inscriptions simplifiées</h3>
+                                <ul>
+                                    <li>Ajout manuel rapide</li>
+                                    <li>Import automatique depuis Beach Padel</li>
+                                    <li>Autonomie des joueurs (à venir)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9IiMwRjZGRkYiLz4KPHBhdGggZD0iTTE1IDMwSDQ1TTMwIDE1VjQ1TTIyIDIySDM4TTIyIDM4SDM4IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iNCIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Structure" class="feature-icon-img">
+                            </div>
+                            <div class="feature-text">
+                                <h3>Structure de tournoi intelligente</h3>
+                                <blockquote>Laissez l'algorithme vous aider à équilibrer vos tableaux.</blockquote>
+                                <ul>
+                                    <li>Calcul automatique de structures en fonction du nombre d'inscrit, des poules et têtes de série</li>
+                                    <li>Gestion avancée : huitièmes, wild-cards, matchs de classement</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjgiIGZpbGw9IiMwRjZGRkYiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSI4IiBmaWxsPSIjRkY0NDQ0Ii8+CjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjMiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPg==" alt="Live" class="feature-icon-img">
+                            </div>
+                            <div class="feature-text">
+                                <h3>Suivi en direct & gestion temps réel</h3>
+                                <ul>
+                                    <li>Saisie de scores en live depuis l'app web</li>
+                                    <li>Gestion des forfaits et tirages</li>
+                                    <li>Visualisation instantanée pour les joueurs et les e-spectateurs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-screen">
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <div class="phone-header">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYzIiBoZWlnaHQ9IjE3NiIgdmlld0JveD0iMCAwIDc2MyAxNzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0zNjIuMjIgMTAwLjM1OEMzODQuMDM3IDEwMC4zNTkgNDAwLjAzOCAxMTYuMzQ3IDQwMC4wMzggMTM4LjE0OEM0MDAuMDM4IDE1OS45NSAzODQuMDM3IDE3NS45MzggMzYyLjIyIDE3NS45MzhDMzQwLjQwMiAxNzUuOTM4IDMyNC40MDMgMTU5Ljk1IDMyNC40MDIgMTM4LjE0OEMzMjQuNDAyIDExNi4zNDcgMzQwLjQwMiAxMDAuMzU4IDM2Mi4yMiAxMDAuMzU4Wk0yNTguMjA5IDEzNi44MzlMMjk3LjMzNiAxMDEuODExSDMxNy45OUwyODQuMSAxMzIuMTg4TDMxNy45OSAxNzQuNDgzSDMwMC4yNDVMMjczLjc3MiAxNDEuNDlMMjU4LjIwOSAxNTUuNDQzVjE3NC40ODNIMjQzLjY2NFYxMDEuODExSDI1OC4yMDlWMTM2LjgzOVpNNDU0LjAxOCAxMzIuMzMzSDQ1NS4xODJMNDc3Ljg3MiAxMDEuODExSDQ5MC45NjNWMTc0LjQ4M0g0NzYuNDE4VjEyMy42MTJINDc2LjEyN0M0NzYuMTEzIDEyMy42NTYgNDc0LjY2IDEyOC4yOCA0NzIuMDU0IDEzMS43NTJMNDYxLjg3MiAxNDUuNDE1SDQ0Ny4zMjdMNDM3LjE0NiAxMzEuNzUyQzQzNC41NDMgMTI4LjI4NSA0MzMuMDkgMTIzLjY2OSA0MzMuMDcyIDEyMy42MTJINDMyLjc4MlYxNzQuNDgzSDQxOC4yMzZWMTAxLjgxMUg0MzEuMzI3TDQ1NC4wMTggMTMyLjMzM1pNNTY1LjIwMSAxMDEuODExQzU3OC4yOTIgMTAxLjgxMSA1ODcuMDE5IDExMC41MzEgNTg3LjAyIDEyMy42MTJDNjg3LjAxOSAxMzYuMTEyIDU3OC4yOTIgMTQ0LjY4NyA1NjUuMjAxIDE0NC42ODhINTI3LjM4M1YxNzQuNDgzSDUxMi44MzhWMTAxLjgxMUg1NjUuMjAxWk02NzUuNzI5IDExNC44OTJINjE5LjAwMlYxMzEuNjA2SDY2MS4xODRWMjQ0LjY4OEg2MTkuMDAyVjE2MS40MDJINjc1LjcyOVYxNzQuNDgzSDYwNC40NTZWMTAxLjgxMUg2NzUuNzI5VjExNC44OTJaTTc2My4wMDEgMTE0Ljg5Mkg3MzMuOTFWMjQ0LjQ4M0g3MTkuMzY0VjExNC44OTJINjkwLjI3NFYxMDEuODExSDc2My4wMDFWMTE0Ljg5MlpNNDMuNjk3MyAzOC40ODgzSDQ4LjY5MTRMODcuMzk0NSAwSDE3OS4wMzNWNDMuNDU1MUgxNDAuMDhWNDguMTcyOUwxNzkuMDMzIDg2LjkwOTJWMTMwLjM2NEg4Ny4zOTQ1TDQ4LjY5MTQgOTEuODc2SDQzLjY5NzNWMTczLjgxOEgwVjg2LjkwOTJMMzguNzAzMSA0OC40MjA5VjQzLjQ1NTFIMFYwSDQzLjY5NzNWMzguNDg4M1pNMzYyLjIyIDExNC4xNjZDMzQ5LjEyOSAxMTQuMTY2IDMzOS42NzUgMTI0LjM0MSAzMzkuNjc1IDEzOC4xNDhDMzM5LjY3NSAxNTEuOTU2IDM0OS4xMjkgMTYyLjEzMSAzNjIuMjIgMTYyLjEzMUMzNzUuMzEgMTYyLjEzMSAzODQuNzY0IDE1MS45NTYgMzg0Ljc2NSAxMzguMTQ4QzM4NC43NjUgMTI0LjM0MSAzNzUuMzEgMTE0LjE2NiAzNjIuMjIgMTE0LjE2NlpNNTI3LjM4MyAxMzEuNjA2SDU2NS4yMDFDNTY5LjU2NCAxMzEuNjA2IDU3Mi40NzMgMTI4LjY5OSA1NzIuNDc0IDEyNC4zMzlWMTIyLjE1OUM1NzIuNDc0IDExNy43OTkgNTY5LjU2NSAxMTQuODkyIDU2NS4yMDEgMTE0Ljg5Mkg1MjcuMzgzVjEzMS42MDZaTTQzLjY5NzMgODYuOTA5MkgxMzUuMzM2VjQzLjQ1NTFINDMuNjk3M1Y4Ni45MDkyWk0yOTYuMDI3IDAuMDAwOTc2NTYyQzMwOS4xMTggMC4wMDExODc3MyAzMTcuODQ2IDguNzIxODMgMzE3Ljg0NiAyMS44MDI3QzMxNy44NDUgMzQuMzAyMSAzMDkuMTE4IDQyLjg3NzcgMjk2LjAyNyA0Mi44Nzc5SDI1OC4yMDlWNzIuNjczOEgyNDMuNjY0VjAuMDAwOTc2NTYySDI5Ni4wMjdaTTM5OC41NDMgNzIuNjczOEgzODIuODM0TDM3Ni44NzEgNTguMTM5NkgzMzguNDcyTDMzMi41MDggNzIuNjczOEgzMTcuMDlMMzQ2LjkwNyAwLjAwMDk3NjU2MkgzNjguNzI2TDM5OC41NDMgNzIuNjczOFpNNDUwLjE5NiAwLjAwMDk3NjU2MkM0NzIuMDE0IDAuMDAxMTU0NDYgNDg4LjAxNSAxNS4yNjI4IDQ4OC4wMTUgMzYuMzM3OUM0ODguMDE0IDU3LjI2NzMgNDcyLjAxNCA3Mi42NzM2IDQ1MC4xOTYgNzIuNjczOEg0MTMuODMzVjAuMDAwOTc2NTYySDQ1MC4xOTZaTTU3Ny40MzQgMTMuMDgySDUyMC43MDdWMjkuNzk2OUg1NjIuODg5VjQyLjg3NzlINTIwLjcwN1Y1OS41OTI4SDU3Ny40MzRWNzIuNjczOEg1MDYuMTYyVjAuMDAwOTc2NTYySDU3Ny40MzRWMTMuMDgyWk02MTEuNjE1IDU5LjU5MjhINjU1LjI1MVY3Mi42NzM4SDU5Ny4wN1YwLjAwMDk3NjU2Mkg2MTEuNjE1VjU5LjU5MjhaTTQyOC4zNzggNTkuNTkyOEg0NTAuMTk2QzQ2My4yODcgNTkuNTkyNiA0NzIuNzQxIDQ5Ljg1NDYgNDcyLjc0MSAzNi4zMzc5QzQ3Mi43NDEgMjIuOTY2MiA0NjMuMjg3IDEzLjA4MjIgNDUwLjE5NiAxMy4wODJINDI4LjM3OFY1OS41OTI4Wk0zNDMuODUzIDQ1LjA1ODZIMzcxLjQ4OUwzNTguMzk4IDEzLjA4MkgzNTYuOTQzTDM0My44NTMgNDUuMDU4NlpNMjU4LjIwOSAyOS43OTY5SDI5Ni4wMjdDMzAwLjM5MSAyOS43OTY3IDMwMy4zIDI2Ljg4OTMgMzAzLjMgMjIuNTI5M1YyMC4zNDk2QzMwMy4zIDE1Ljk4OTQgMzAwLjM5MSAxMy4wODIyIDI5Ni4wMjcgMTMuMDgySDI1OC4yMDlWMjkuNzk2OVoiIGZpbGw9IiMxOTE5MUIiLz4KPC9zdmc+" alt="Padel Kompet" class="phone-logo">
+                                </div>
+                                <div class="phone-content">
+                                    <div class="phone-feature active" data-feature="1">
+                                        <div class="phone-feature-title">Inscriptions</div>
+                                        <div class="phone-feature-content">
+                                            <div class="player-list">
+                                                <div class="player-item">👤 Marie Dubois</div>
+                                                <div class="player-item">👤 Jean Martin</div>
+                                                <div class="player-item">👤 Sophie Leroy</div>
+                                                <div class="player-item">👤 Pierre Moreau</div>
+                                            </div>
+                                            <div class="import-button">📥 Import Beach Padel</div>
+                                        </div>
+                                    </div>
+                                    <div class="phone-feature" data-feature="2">
+                                        <div class="phone-feature-title">Structure</div>
+                                        <div class="phone-feature-content">
+                                            <div class="tournament-tree">
+                                                <div class="tree-level">
+                                                    <div class="tree-node">🏆 Finale</div>
+                                                </div>
+                                                <div class="tree-level">
+                                                    <div class="tree-node">⚡ Demi</div>
+                                                    <div class="tree-node">⚡ Demi</div>
+                                                </div>
+                                                <div class="tree-level">
+                                                    <div class="tree-node">🎯 Quart</div>
+                                                    <div class="tree-node">🎯 Quart</div>
+                                                    <div class="tree-node">🎯 Quart</div>
+                                                    <div class="tree-node">🎯 Quart</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="phone-feature" data-feature="3">
+                                        <div class="phone-feature-title">Live</div>
+                                        <div class="phone-feature-content">
+                                            <div class="live-match">
+                                                <div class="match-players">Marie vs Jean</div>
+                                                <div class="match-score">6-4, 3-2</div>
+                                                <div class="match-status">🔴 En cours</div>
+                                            </div>
+                                            <div class="live-match">
+                                                <div class="match-players">Sophie vs Pierre</div>
+                                                <div class="match-score">6-2, 6-1</div>
+                                                <div class="match-status">✅ Terminé</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Section Interface moderne -->
+    <section class="interface">
+        <div class="container">
+            <div class="interface-content">
+                <div class="interface-text">
+                    <h2>Une interface claire et moderne</h2>
+                    <p>Visualisez vos tournois, suivez les résultats et communiquez en un clic. Notre interface intuitive s'adapte à tous les niveaux techniques.</p>
+                </div>
+                <div class="interface-image">
+                    <div class="interface-placeholder">
+                        <div class="placeholder-content">
+                            <div class="placeholder-icon">📱</div>
+                            <h3>Interface Moderne</h3>
+                            <p>Capture d'écran de l'application</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Témoignages -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Déjà adopté par les clubs les plus dynamiques</h2>
+            <p class="section-subtitle">Ils ont choisi Padel Kompet pour moderniser leurs tournois</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-quote">
+                        "Padel Kompet a révolutionné l'organisation de nos tournois. Plus de stress, plus de temps perdu. Nos joueurs adorent !"
+                    </div>
+                    <div class="testimonial-author">Marie Dubois</div>
+                    <div class="testimonial-club">Club de Padel Lyon</div>
+                </div>
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-quote">
+                        "Enfin un outil qui comprend nos besoins d'arbitre. La saisie est intuitive et les résultats se calculent automatiquement."
+                    </div>
+                    <div class="testimonial-author">Jean Martin</div>
+                    <div class="testimonial-club">Arbitre Fédéral</div>
+                </div>
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-quote">
+                        "L'expérience joueur est exceptionnelle. Résultats en direct, notifications, tout est fluide et professionnel."
+                    </div>
+                    <div class="testimonial-author">Sophie Leroy</div>
+                    <div class="testimonial-club">Joueuse passionnée</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA moderne -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Commence ton essai gratuit</h2>
+                <p>Transforme ton activité dès aujourd'hui !</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary">Regarde la démo</a>
+                    <a href="#" class="btn-secondary">Télécharge l'app</a>
+                </div>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <span class="cta-feature-icon">✓</span>
+                        <span>15 jours d'essai gratuit</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="cta-feature-icon">✓</span>
+                        <span>Pas de carte de crédit requise</span>
+                    </div>
+                    <div class="cta-feature">
+                        <span class="cta-feature-icon">✓</span>
+                        <span>Support client au top</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-cta">
+                <h2>Rejoignez les clubs qui passent à la gestion moderne</h2>
+                <p>Commencez dès aujourd'hui à simplifier vos tournois de padel</p>
+                <a href="#" class="btn-primary">Commencer maintenant</a>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#">Mentions légales</a>
+                <a href="#">Politique de confidentialité</a>
+                <a href="#">Conditions d'utilisation</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureItems = document.querySelectorAll('.feature-item');
+        const phoneFeatures = document.querySelectorAll('.phone-feature');
+        
+        featureItems.forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                // Retirer la classe active de tous les écrans
+                phoneFeatures.forEach(feature => feature.classList.remove('active'));
+                // Ajouter la classe active à l'écran correspondant
+                const targetFeature = document.querySelector(`[data-feature="${index + 1}"]`);
+                if (targetFeature) {
+                    targetFeature.classList.add('active');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
